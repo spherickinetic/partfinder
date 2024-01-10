@@ -1,0 +1,61 @@
+{{ form_start(form) }}
+
+    {% if not form.vars.valid %}
+        <div class="form-error alert alert-danger">
+            {% for child in form.children %}
+                {%for error in child.vars.errors%}
+                    <span>{{error.message}}</span>
+                {%endfor%}
+            {%endfor%}
+        </div>
+    {%endif%}
+
+    {% if form.partNumber is defined %}
+        <div class="row mb-3">
+            <div class="col">
+                {{ form_label(form.partNumber) }}
+                {{ form_widget(form.partNumber) }}
+            </div>
+        </div>
+    {%endif%}
+
+    {% if form.vendorName is defined %}
+        <div class="row mb-3">
+            <div class="col">
+                {{ form_label(form.vendorName) }}
+                {{ form_widget(form.vendorName) }}
+            </div>
+        </div>
+    {%endif%}
+
+    {% if form.part is defined %}
+        <div class="row mb-3">
+            <div class="col">
+                {{ form_label(form.part) }}
+                {{ form_widget(form.part) }}
+            </div>
+        </div>
+    {%endif%}
+
+    {% if form.vendor is defined %}
+        <div class="row mb-3">
+            <div class="col">
+                {{ form_label(form.vendor) }}
+                {{ form_widget(form.vendor) }}
+            </div>
+        </div>
+    {%endif%}
+
+        {% if form.vendorPartNumber is defined %}
+        <div class="row mb-3">
+            <div class="col">
+                {{ form_label(form.vendorPartNumber) }}
+                {{ form_widget(form.vendorPartNumber) }}
+            </div>
+        </div>
+    {%endif%}
+
+
+    <button class="btn btn-success">Save!</button>
+
+{{ form_end(form) }}

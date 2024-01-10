@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PartFinder - Show{% endblock %}
+
+{% block body %}
+
+    <div class="actions position-fixed top-0 end-0 p-2 d-flex">
+        <form method="post" action="{{ path(deletePath, {'id': item.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+            <input type="hidden" name="referer" value="{{app.request.headers.get('referer')}}"/>
+            <button class="btn btn-danger">Delete</button>
+        </form>
+        <a class="btn btn-primary ms-2" href="{{ path(editPath, {'id': item.id}) }}">Edit</a>
+    </div>
+
+    <table class="table table-striped table-hover table-sm border">
+        <thead class="table-dark">
+            <tr>
+            {% if item.partNumber is defined %}
+                <th>Part Number</th>
+            {%endif%}
+            {% if item.vendorName is defined %}
+                <th>Vendor Name</th>
+            {%endif%}
+            {% if item.part is defined %}
+                <th>Part Number</th>
+            {%endif%}
+            {% if item.vendor is defined %}
+                <th>Vendor Name</th>
+            {%endif%}
+            {% if item.vendorPartNumber is defined %}
+                <th>Vendor Part Number</th>
+            {%endif%}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% if item.partNumber is defined %}
+                <td>{{ item.partNumber }}</td>
+            {%endif%}
+            {% if item.vendorName is defined %}
+                <td>{{ item.vendorName }}</td>
+            {%endif%}
+            {% if item.part is defined %}
+                <td>{{ item.part.partNumber }}</td>
+            {%endif%}
+            {% if item.vendor is defined %}
+                <td>{{ item.vendor.vendorName }}</td>
+            {%endif%}
+            {% if item.vendorPartNumber is defined %}
+                <td>{{ item.vendorPartNumber }}</td>
+            {%endif%}
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
